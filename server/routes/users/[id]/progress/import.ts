@@ -15,8 +15,8 @@ const progressMetaSchema = z.object({
 const progressItemSchema = z.object({
   meta: progressMetaSchema,
   tmdbId: z.string(),
-  duration: z.number(),
-  watched: z.number(),
+  duration: z.number().transform(n => Math.round(n).toString()),
+  watched: z.number().transform(n => Math.round(n).toString()),
   seasonId: z.string().optional(),
   episodeId: z.string().optional(),
   seasonNumber: z.number().optional(),
@@ -74,7 +74,7 @@ export default defineEventHandler(async (event) => {
       if (newItemIndex > -1) {
         const newItem = newItems[newItemIndex];
         
-        if (Number(existingItem.watched) < newItem.watched) {
+        if (Number(existingItem.watched) < Number(newItem.watched)) {
           const isMovie = newItem.meta.type === 'movie';
           itemsToUpsert.push({
             id: existingItem.id,
