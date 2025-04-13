@@ -48,8 +48,7 @@ export default defineEventHandler(async (event) => {
       
       const validatedBody = userSettingsSchema.parse(body);
       
-      // Handle proxyUrls properly - ensure it's an array or empty array when null
-      const proxyUrls = validatedBody.proxyUrls === null ? [] : (validatedBody.proxyUrls || []);
+      const proxyUrls = validatedBody.proxyUrls;
       
       const data = {
         application_theme: validatedBody.applicationTheme ?? null,
