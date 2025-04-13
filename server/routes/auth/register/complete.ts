@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useChallenge } from '~/utils/challenge';
 import { useAuth } from '~/utils/auth';
-import { randomUUID } from 'crypto';
+import { generateShortId } from '~/utils/id';
 
 const completeSchema = z.object({
   publicKey: z.string(),
@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
     });
   }
   
-  const userId = randomUUID();
+  const userId = generateShortId();
   const now = new Date();
   
   const user = await prisma.users.create({

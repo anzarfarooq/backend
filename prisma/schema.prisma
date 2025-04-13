@@ -58,7 +58,7 @@ model sessions {
 }
 
 model user_settings {
-  id                        String   @id
+  id                        String   @id @db.VarChar(8)
   application_theme         String?  @db.VarChar(255)
   application_language      String?  @db.VarChar(255)
   default_subtitle_language String?  @db.VarChar(255)
@@ -68,7 +68,7 @@ model user_settings {
 }
 
 model users {
-  id             String    @id
+  id             String    @id @db.VarChar(8)
   public_key     String    @unique(map: "users_public_key_unique")
   namespace      String    @db.VarChar(255)
   created_at     DateTime  @db.Timestamptz(0)
